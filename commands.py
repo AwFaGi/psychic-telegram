@@ -27,7 +27,7 @@ async def range_func(message: types.Message):
             "/range начало конец\n" \
             "/range начало конец шаг\n" \
             "</code>"
-        await message.reply("Произошла ошибка!", parse_mode="HTML")
+        await message.reply(s, parse_mode="HTML")
 
 
 bot_commands = {

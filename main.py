@@ -1,7 +1,6 @@
 import hashlib
 import logging
 import os
-import time
 from random import choice
 from typing import List
 
@@ -36,7 +35,7 @@ async def inline_echo(inline_query: types.InlineQuery):
 
     greeting_name = user.first_name or "Unknown"
     greeting_surname = user.last_name or "Unknown"
-    cock_size = cock_controller.get(user.username)
+    cock_size = cock_controller.get(user.id)
 
     result_string = f"{greeting_name} {greeting_surname}, your cock is {cock_size} cm"
     input_content = types.InputTextMessageContent(result_string)
@@ -48,7 +47,7 @@ async def inline_echo(inline_query: types.InlineQuery):
         input_message_content=input_content,
     )
 
-    await bot.answer_inline_query(inline_query.id, results=[item])
+    await bot.answer_inline_query(inline_query.id, results=[item], cache_time=0, is_personal=True)
 
 
 @dp.message_handler(commands=bot_commands.keys())
@@ -94,7 +93,4 @@ async def unknown_type(message: types.Message):
 
 if __name__ == "__main__":
     while True:
-        try:
-            executor.start_polling(dp, skip_updates=True)
-        except Exception:
-            time.sleep(5)
+        executor.start_polling(dp, skip_updates=True)
