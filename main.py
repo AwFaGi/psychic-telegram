@@ -65,7 +65,6 @@ async def start_func(message: types.Message):
 async def master(message: types.Message):
     if message.chat.type == "private":
         await message.reply(choice(message.text.splitlines()))
-
     elif message.chat.type == "group":
         cash = message.text.splitlines()
         if cash[0] in AVAILABLE_GROUP_COMMANDS and len(cash) > 1:
